@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 4</title>
+    <script>
+
+        // Задание 1
+        /* function getObjNmb(num) {
+
+            if (numberEnter > 999) {
+                console.log("Введено число больше 999");
+                console.log({});
+            }
+            else if (numberEnter < 0) {
+                console.log("Введено отрицательное число");
+                console.log({});
+            }
+            else {
+                var ObjNumRes = {};
+                var ObjNum = String(num).split("");
+                var lengthNmb = ObjNum.length;
+
+                ObjNumRes.units = ObjNum[lengthNmb - 1];
+
+                if (ObjNum[lengthNmb - 2]) {
+                    ObjNumRes.tens = ObjNum[lengthNmb - 2];
+                }
+
+                if (ObjNum[lengthNmb - 3]) {
+                    ObjNumRes.hundreds = ObjNum[lengthNmb - 3];
+                }
+
+                console.log(ObjNumRes);
+            }
+
+        }
+
+        var numberEnter = parseInt(prompt("Введите целое число от 0 до 999"));
+
+        while (isNaN(numberEnter)) {
+            numberEnter = parseInt(prompt("Введите целое число от 0 до 999"));
+        }
+
+        getObjNmb(numberEnter); */
+
+
+        // Задание 2
+        /* var number = []; // четыре цифры нашего числа
+        var attempts = 0; // число попыток
+        var historyGame = []; // число попыток
+
+        generateNumber(); //сгенерировали неповторяющиеся значения массива
+        alert(number.join(''));//преобразование массива в строку
+        guessNumber();
+
+        function generateNumber() {
+            var min = 1;
+            var max = 9;
+
+            // заполняем массив цифр в числе
+            for (var i = 0; i < 4; i++) {
+                var part = Math.round(Math.random() * (max - min) + min); //5
+
+                // первое число всегда уникально
+                if (i == 0) {
+                    number[0] = part;
+                }
+                else { // пока не сгенерируется уникальное число, генерируем новые случайные числа
+                    while (number.indexOf(part) != -1) {//элемент найден
+                        part = Math.round(Math.random() * (max - min) + min);
+                    }
+
+                    number[i] = part;
+                }
+            }
+        }
+
+        function guessNumber() {
+            var result = prompt("Введите число (-1 - закончить игру)", 0);
+            var gameIsRunning = true;//проверка на то, что игра идет
+
+            // пока игрок не угадал число
+            while (gameIsRunning) {
+                // выход из игры
+                if (parseInt(result) == -1) {
+                    gameIsRunning = false;
+                }
+                // игрок ввел некорректные данные
+                else if (parseInt(result) == 0 || isNaN(parseInt(result))) {
+                    alert("Вы не ввели число");
+                    // запрашиваем по новой
+                    result = prompt("Введите число (-1 - закончить игру)", 0);
+                }
+                // проверяем число
+                else {
+                    historyGame.push(result);
+                    var answer = checkNumber(result);//answer[false,1,1]
+                    if (answer[0]) {
+                        // число угадано
+                        alert("Поздравляем! Вы угадали число. Кол-во попыток: " + attempts);
+                        // останавливаем игру
+                        gameIsRunning = false;
+                    }
+                    else {
+                        alert("Быки: " + answer[1] + " Коровы: " + answer[2]);
+
+                        while (confirm("Хотите посмотреть какое число вы уже вводили?")) {
+                            var attemptNmb = parseInt(prompt("Введите номер попытки"));
+                            if (!historyGame[attemptNmb - 1]) {
+                                alert("У Вас было всего попыток: " + historyGame.length)
+                            }
+                            else {
+                                alert(historyGame[attemptNmb - 1])
+                            }
+                        }
+
+                        // следующий ход
+                        result = prompt("Введите число (-1 - закончить игру)", 0);
+                    }
+                }
+            }
+        }
+
+        function checkNumber(myresult) {//1234
+
+            // каждая проверка увеличивает кол-во попыток на 1
+            attempts++;
+
+            // массив результата
+            // 0 - общий результат
+            // 1 - быки
+            // 2 - коровы
+            var answer = [false, 0, 0];
+
+            // раскладываем число на разряды
+            // console.log(myresult);
+            // console.log(number);
+
+            var ranks = myresult.split("");//массив, полученный из введенного числа
+
+            for (var i = 0; i < ranks.length; i++) {
+                // если по индексу значения совпадают, то это бык
+                if (parseInt(ranks[i]) == number[i]) {
+                    answer[1]++;
+                }
+                // если число вообще есть в массиве, то это корова
+                else if (number.indexOf(parseInt(ranks[i])) != -1) {
+                    answer[2]++;
+                }
+            }
+
+            // если набралось 4 быка, то это победа
+            if (answer[1] == 4) {
+                answer[0] = true;
+            }
+
+            return answer;
+        } */
+
+
+        // Задание 3
+        /* function checkAnswer(a) {
+
+            if (a == "A" || a == "B" || a == "C" || a == "D" || a == -1) {
+                answers.push(a);
+                console.log(answers);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        var prize = 0;
+        var answers = [];
+        var questions = [
+            {
+                question: "Вопрос 1. 1000 руб.\nСколько будет 23 * 5 ?\nA. 125\nB. 115\nC. 105\nD. 135\n\nДля выхода из игры введите -1",
+                price: 1000,
+                correct: "B"
+            },
+            {
+                question: "Вопрос 2. 2000 руб.\nСколько будет 216 / 8 ?\nA. 24\nB. 25.5\nC. 27\nD. 28\n\nДля выхода из игры введите -1",
+                price: 2000,
+                correct: "C"
+            },
+            {
+                question: "Вопрос 3. 5000 руб.\nСколько будет 32 + 41 * 6 ?\nA. 278\nB. 438\nC. 219\nD. 238\n\nДля выхода из игры введите -1",
+                price: 5000,
+                correct: "A"
+            },
+            {
+                question: "Вопрос 4. 12000 руб.\nСколько будет 15 + 13 * 3 - 11 ?\nA. -224\nB. 43\nC. 67\nD. 33\n\nДля выхода из игры введите -1",
+                price: 12000,
+                correct: "B"
+            }
+        ];
+
+        for (var i in questions) {
+            while (!checkAnswer(prompt(questions[i].question))) {
+                alert("Введите A, B, C или D или -1 для окончания игры!");
+            }
+            if (answers[i] == -1) {
+                alert("Вы вышли из игры..");
+                break;
+            }
+            else if (questions[i].correct == answers[i]) {
+                prize += questions[i].price;
+                if (i == (questions.length - 1)) {
+                    alert("Поздравляем! Вы победили! Ваш выигрыш составил " + prize + " руб.");
+                }
+                else
+                    alert("Правильно! Ваш выигрыш на данный момент составляет " + prize + " руб.");
+            }
+            else {
+                alert("К сожалению, Вы ответили неверно. Ваш выигрыш " + prize + " руб. сгорает..");
+                break;
+            }
+        } */
+
+
+
+
+    </script>
+</head>
+
+</html>
